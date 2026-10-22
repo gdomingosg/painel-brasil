@@ -18,6 +18,12 @@ Para abrir direto numa aba, acrescente `#` e o nome dela ao endereço:
 
 O site é 100% estático: não precisa de servidor, banco de dados nem login. Funciona no celular e no computador, com tema claro/escuro (segue o sistema; botão no canto inferior direito).
 
+## Intenção de voto no 2º turno
+
+Na aba `#duelo`, logo abaixo do resultado do 1º turno, a página consulta `data/pesquisas_2turno.json` toda vez que é aberta (e no botão "Consultar de novo"). A consulta vai primeiro direto ao arquivo no GitHub (`raw.githubusercontent.com`), então uma pesquisa nova aparece assim que o arquivo é atualizado na branch `main`, sem esperar a publicação do Pages; se essa consulta falhar, usa a cópia publicada com o site.
+
+Para incluir uma pesquisa, acrescente um item em `pesquisas` (instituto, datas de campo e divulgação, amostra, margem, registro no TSE, votos válidos de `flavio` e `lula`, fonte e link) e atualize `atualizado_em`. A média exibida é simples: a última pesquisa de cada instituto feita nos 7 dias anteriores à mais recente.
+
 ## Atualizar os dados
 
 Edite o arquivo correspondente em `data/` e faça commit; o GitHub Pages publica a nova versão em alguns minutos.

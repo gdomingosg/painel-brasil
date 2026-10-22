@@ -79,6 +79,34 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 <script src="vendor/d3.v7.9.0.min.js"></script>
 <script>window.__DASH_DATASETS__ = [{"id": "anotacoes"}, {"id": "armas_fatos"}, {"id": "armas_marcos"}, {"id": "armas_mortes_nacional"}, {"id": "candidatos"}, {"id": "candidatos_secoes"}, {"id": "checagens"}, {"id": "classe_autodeclarada"}, {"id": "classe_fgv"}, {"id": "classe_identidade"}, {"id": "classe_motivos"}, {"id": "classe_renda_uf"}, {"id": "classe_voto"}, {"id": "debates_2026"}, {"id": "eleicao_2026"}, {"id": "estados"}, {"id": "fem_fatos"}, {"id": "fem_nacional"}, {"id": "fem_painel_uf"}, {"id": "gov_indicadores"}, {"id": "gov_internacional"}, {"id": "gov_pesos"}, {"id": "gov_series"}, {"id": "gov_textos"}, {"id": "homicidios_ocultos"}, {"id": "homicidios_uf"}, {"id": "presidentes"}, {"id": "resumo_temas"}, {"id": "series_nacionais"}, {"id": "ufs_mapa"}];</script>
 <script src="dash-runtime.js"></script>
+<style id="p2-css">
+.pi #card-p2 .p2-top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--cds-gap-sm);flex-wrap:wrap}
+.pi #card-p2 h2{margin:0;font-size:1.15rem;font-weight:700}
+.pi .p2-status{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pi .p2-dot{width:8px;height:8px;border-radius:50%;background:var(--neutro);flex:none}
+.pi .p2-status[data-s="ok"] .p2-dot{background:var(--color-ok)}
+.pi .p2-status[data-s="loading"] .p2-dot{background:var(--color-warn);animation:p2pulse 1s ease-in-out infinite}
+.pi .p2-status[data-s="erro"] .p2-dot{background:var(--color-bad)}
+@keyframes p2pulse{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.pi .p2-status .p2-dot{animation:none}}
+.pi .p2-nums{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:var(--cds-gap-sm)}
+.pi .p2-num{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pi .p2-num.f{text-align:right;align-items:flex-end}
+.pi .p2-num b{font-size:2.1rem;line-height:1.05;font-weight:700;font-variant-numeric:tabular-nums}
+.pi .p2-num.l b{color:var(--esq)}
+.pi .p2-num.f b{color:var(--dir)}
+.pi .p2-num span{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.pi .p2-mid{text-align:center;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);padding-bottom:6px;max-width:16ch}
+.pi .p2-sum{margin:0;font-size:var(--cds-font-size-body);line-height:1.55;max-width:75ch}
+.pi .p2-h{margin:var(--cds-gap-sm) 0 0;font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium)}
+.pi #card-p2 details{border-top:1px solid var(--color-border-line);padding-top:var(--cds-gap-sm)}
+.pi #card-p2 summary{cursor:pointer;font-size:var(--cds-font-size-body);font-weight:var(--cds-font-weight-medium)}
+.pi #card-p2 .tbl-wrap{margin-top:var(--cds-gap-sm);max-height:420px}
+.pi #card-p2 td a{color:inherit}
+.pi #card-p2 td.wrap{white-space:normal;min-width:220px}
+.pi .p2-sw{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+@media (max-width:560px){.pi .p2-num b{font-size:1.7rem}.pi .p2-mid{display:none}.pi .p2-nums{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <main class="site">
@@ -136,6 +164,28 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 <div class="chart-box" id="echart" data-source="eleicao_2026"></div>
 <p class="note" id="efonte"></p>
 <div class="ler"><span class="ler-k">Como ler</span><p>A barra representa todos os votos válidos do 1º turno. Lula fica à esquerda, em vermelho; Flávio à direita, em azul; os demais candidatos ficam no meio, em cinza. A linha tracejada marca a metade dos votos: quem passasse dela venceria já no 1º turno. Toque em cada parte para ver os votos.</p></div>
+</div>
+<div class="card" id="card-p2" aria-live="polite">
+<div class="p2-top">
+<h2>Intenção de voto no 2º turno</h2>
+<button class="chip" id="p2-btn" type="button">Consultar de novo</button>
+</div>
+<p class="note p2-status" id="p2-status" data-s="loading"><span class="p2-dot"></span><span id="p2-status-t">Consultando as pesquisas mais recentes…</span></p>
+<div class="p2-nums" id="p2-nums" hidden>
+<div class="p2-num l"><b id="p2-l">—</b><span>Lula (PT)</span></div>
+<div class="p2-mid" id="p2-mid"></div>
+<div class="p2-num f"><b id="p2-f">—</b><span>Flávio Bolsonaro (PL)</span></div>
+</div>
+<div class="chart-box" id="p2-bar" style="min-height:60px"></div>
+<p class="p2-sum" id="p2-sum"></p>
+<h3 class="p2-h">Última pesquisa de cada instituto</h3>
+<div class="chart-box" id="p2-inst"></div>
+<h3 class="p2-h">Como as pesquisas andaram desde o 1º turno</h3>
+<div class="chart-box" id="p2-trend"></div>
+<p class="note" id="p2-trend-note"></p>
+<div class="ler"><span class="ler-k">Como ler</span><p>Os números grandes são a média simples da última pesquisa de cada instituto feita nos 7 dias anteriores à mais recente, em votos válidos (sem brancos, nulos e indecisos). No gráfico dos institutos, o ponto vermelho é Lula e o azul é Flávio; a faixa clara em volta de cada ponto é a margem de erro. Quando as faixas dos dois se cruzam, a pesquisa indica empate técnico. Na linha do tempo, cada ponto é uma pesquisa, posicionada no último dia de entrevistas, e as linhas mostram a média dos institutos a cada data. Pesquisa retrata o momento em que foi feita; não é previsão do resultado.</p></div>
+<details><summary id="p2-lista-t">Todas as pesquisas e fontes</summary><div class="tbl-wrap" id="p2-lista"></div></details>
+<p class="note" id="p2-nota"></p>
 </div>
 <div class="card d-intro">
 <h3>Como esta comparação foi montada</h3>
@@ -914,6 +964,254 @@ dash.calc("checagem_resumo",{title:"Resumo das checagens por candidato",descript
     var navTop=document.getElementById(t.dataset.tab);
     if(navTop){var y=navTop.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-8; if(window.scrollY>y) window.scrollTo({top:y,behavior:'smooth'});}
   });
+})();
+</script>
+<script id="p2-js">
+/* Intenção de voto no 2º turno: consulta o arquivo de pesquisas ao abrir a página.
+   Busca primeiro a versão mais nova no GitHub (raw.githubusercontent.com, sem esperar
+   a publicação do Pages) e, se falhar, a cópia publicada junto com o site. */
+(function () {
+  "use strict";
+  var RAW = "https://raw.githubusercontent.com/gdomingosg/painel-brasil/main/data/pesquisas_2turno.json";
+  var LOCAL = "data/pesquisas_2turno.json";
+  var JANELA_DIAS = 7;
+  var PRIMEIRO_TURNO = { data: "2026-10-04", flavio: 47.03, lula: 45.16 };
+  var st = { j: null, origem: "", quando: null, erro: "" };
+  var nf1 = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  var nf0 = new Intl.NumberFormat("pt-BR");
+  var $ = function (id) { return document.getElementById(id); };
+  function pc(v) { return nf1.format(v) + "%"; }
+  function dmy(s) { if (!s) return "—"; var p = s.slice(0, 10).split("-"); return p[2] + "/" + p[1]; }
+  function day(s) { return new Date(s.slice(0, 10) + "T12:00:00"); }
+  function chave(nome) { return String(nome).split("/100%")[0].trim(); }
+
+  function getJson(url, ms) {
+    var ctl = window.AbortController ? new AbortController() : null;
+    var to = ctl ? setTimeout(function () { ctl.abort(); }, ms) : null;
+    return fetch(url + (url.indexOf("?") < 0 ? "?" : "&") + "t=" + Date.now(), { cache: "no-store", signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (j) { if (!j || !Array.isArray(j.pesquisas) || !j.pesquisas.length) throw new Error("arquivo sem pesquisas"); return j; })
+      .finally(function () { if (to) clearTimeout(to); });
+  }
+
+  function status(s, txt) { var e = $("p2-status"); e.setAttribute("data-s", s); $("p2-status-t").textContent = txt; }
+
+  function consultar() {
+    status("loading", "Consultando as pesquisas mais recentes…");
+    $("p2-btn").disabled = true;
+    getJson(RAW, 8000)
+      .then(function (j) { return { j: j, origem: "arquivo de pesquisas no GitHub" }; })
+      .catch(function () { return getJson(LOCAL, 8000).then(function (j) { return { j: j, origem: "cópia publicada com o site" }; }); })
+      .then(function (r) { st.j = r.j; st.origem = r.origem; st.erro = ""; st.quando = new Date(); })
+      .catch(function (e) { st.erro = String(e && e.message || e); st.quando = new Date(); })
+      .then(function () { $("p2-btn").disabled = false; montar(); });
+  }
+
+  function preparar(j) {
+    var ps = j.pesquisas.map(function (p) {
+      var f = Number(p.flavio), l = Number(p.lula), s = f + l;
+      return Object.assign({}, p, {
+        F: f / s * 100, L: l / s * 100, m: p.margem == null ? null : Number(p.margem),
+        ref: p.campo_fim || p.divulgacao, pub: p.divulgacao || p.campo_fim, k: chave(p.instituto)
+      });
+    }).filter(function (p) { return p.ref && isFinite(p.F); });
+    ps.sort(function (a, b) { return a.ref < b.ref ? -1 : a.ref > b.ref ? 1 : (a.pub < b.pub ? -1 : 1); });
+    return ps;
+  }
+
+  // Última pesquisa de cada instituto com campo terminado na janela que acaba em "ate".
+  function recentes(ps, ate) {
+    var ini = new Date(day(ate).getTime() - JANELA_DIAS * 864e5);
+    var por = {};
+    ps.forEach(function (p) { if (p.ref <= ate && day(p.ref) >= ini) por[p.k] = p; });
+    return Object.keys(por).map(function (k) { return por[k]; });
+  }
+
+  function montar() {
+    if (!st.j) {
+      status("erro", "Não foi possível consultar as pesquisas agora (" + st.erro + "). Toque em “Consultar de novo”.");
+      return;
+    }
+    var j = st.j, ps = preparar(j);
+    var ultimo = ps.reduce(function (a, p) { return p.ref > a ? p.ref : a; }, "");
+    var rec = recentes(ps, ultimo).sort(function (a, b) { return b.F - a.F; });
+    var mF = d3.mean(rec, function (p) { return p.F; }), mL = 100 - mF;
+    var hora = st.quando.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    var atu = j.atualizado_em ? new Date(j.atualizado_em) : null;
+    status("ok", "Consulta feita às " + hora + " · " + ps.length + " pesquisas de " + new Set(ps.map(function (p) { return p.k; })).size +
+      " institutos · dados atualizados em " + (atu ? atu.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }) + " às " +
+      atu.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) : "—") + " · fonte: " + st.origem);
+    $("p2-nums").hidden = false;
+    $("p2-l").textContent = pc(mL);
+    $("p2-f").textContent = pc(mF);
+    var iniJ = d3.min(rec, function (p) { return p.campo_inicio || p.ref; });
+    $("p2-mid").textContent = "média de " + rec.length + " institutos, entrevistas de " + dmy(iniJ) + " a " + dmy(ultimo);
+
+    var fFrente = rec.filter(function (p) { return p.F > p.L + 1e-9; }).length;
+    var lFrente = rec.filter(function (p) { return p.L > p.F + 1e-9; }).length;
+    var comM = rec.filter(function (p) { return p.m != null; });
+    var empate = comM.filter(function (p) { return Math.abs(p.F - p.L) <= 2 * p.m + 1e-9; }).length;
+    var gap = mF - mL, lider = gap >= 0 ? "Flávio" : "Lula";
+    var mais = ps.filter(function (p) { return p.pub === d3.max(ps, function (q) { return q.pub; }); });
+    $("p2-sum").textContent = (Math.abs(gap) < 0.05 ? "Os dois aparecem empatados na média. " :
+      lider + " aparece à frente na média, por " + nf1.format(Math.abs(gap)) + " ponto" + (Math.abs(gap) >= 1.95 ? "s" : "") + ". ") +
+      "Flávio lidera numericamente em " + fFrente + " dos " + rec.length + " institutos e Lula em " + lFrente +
+      (rec.length - fFrente - lFrente ? " (" + (rec.length - fFrente - lFrente) + " com empate exato)" : "") + ". " +
+      (comM.length ? "Em " + empate + " das " + comM.length + " pesquisas com margem de erro informada, a diferença fica dentro da margem (empate técnico). " : "") +
+      "Mais recente: " + mais.map(function (p) { return p.instituto + " (" + dmy(p.pub) + ", Flávio " + pc(p.F) + " x Lula " + pc(p.L) + ")"; }).join("; ") + ".";
+
+    var visivel = !$("duelo").hidden;
+    if (visivel) { barra(mF, mL); institutos(rec); tendencia(ps); }
+    lista(ps);
+    $("p2-nota").textContent = (j.nota || "") + " O painel não pondera os institutos por tamanho de amostra, método ou histórico de acerto.";
+  }
+
+  function tip(box) {
+    var t = box.querySelector(".tip");
+    if (!t) { t = document.createElement("div"); t.className = "tip"; t.hidden = true; box.appendChild(t); }
+    return t;
+  }
+  function mostrar(box, t, linhas, ev) {
+    t.replaceChildren();
+    linhas.forEach(function (l) {
+      var d = document.createElement("div");
+      if (l[0]) { var k = document.createElement("span"); k.className = "t-k"; k.textContent = l[0] + " "; d.appendChild(k); }
+      if (l[1]) { var v = document.createElement("span"); v.className = l[0] ? "t-v" : ""; v.textContent = l[1]; if (!l[0]) v.style.fontWeight = "600"; d.appendChild(v); }
+      t.appendChild(d);
+    });
+    t.hidden = false;
+    var xy = d3.pointer(ev, box), w = box.clientWidth, tw = t.offsetWidth, th = t.offsetHeight;
+    var x = Math.min(Math.max(0, xy[0] + 12), Math.max(0, w - tw)), y = xy[1] - th - 10;
+    if (y < 0) y = xy[1] + 14;
+    t.style.left = x + "px"; t.style.top = y + "px";
+  }
+  function linhasTip(p) {
+    var r = [[p.instituto, ""], ["Lula:", pc(p.L)], ["Flávio:", pc(p.F)],
+      ["Entrevistas:", (p.campo_inicio ? dmy(p.campo_inicio) + " a " : "até ") + dmy(p.campo_fim || p.ref)]];
+    if (p.divulgacao) r.push(["Divulgada:", dmy(p.divulgacao)]);
+    if (p.amostra) r.push(["Entrevistados:", nf0.format(p.amostra)]);
+    if (p.m != null) r.push(["Margem de erro:", "±" + nf1.format(p.m) + " p.p."]);
+    if (p.metodo) r.push(["Método:", p.metodo]);
+    if (p.calculado) r.push(["", "Válidos calculados a partir dos votos totais"]);
+    return r;
+  }
+
+  function barra(mF, mL) {
+    var box = $("p2-bar"), w = Math.max(280, box.clientWidth), x = d3.scaleLinear([0, 100], [0, w]);
+    var svg = d3.create("svg").attr("width", "100%").attr("viewBox", "0 0 " + w + " 56").attr("role", "img")
+      .attr("aria-label", "Média: Lula " + pc(mL) + ", Flávio " + pc(mF));
+    svg.append("rect").attr("x", 0).attr("y", 6).attr("height", 26).attr("rx", 4).attr("width", Math.max(0, x(mL) - 1)).attr("fill", "var(--esq)");
+    svg.append("rect").attr("x", x(mL) + 1).attr("y", 6).attr("height", 26).attr("rx", 4).attr("width", Math.max(0, w - x(mL) - 1)).attr("fill", "var(--dir)");
+    svg.append("line").attr("x1", x(50)).attr("x2", x(50)).attr("y1", 0).attr("y2", 38).attr("stroke", "var(--color-fg)").attr("stroke-dasharray", "3 3");
+    svg.append("text").attr("x", x(50)).attr("y", 52).attr("text-anchor", "middle").text("metade dos votos válidos");
+    box.replaceChildren(svg.node());
+  }
+
+  function institutos(rec) {
+    var box = $("p2-inst"), w = Math.max(300, box.clientWidth), estreito = w < 520;
+    var lab = estreito ? 118 : 170, dir = 44, rowH = 28, top = 22, h = top + rec.length * rowH + 8;
+    var lo = Math.min(46, Math.floor(d3.min(rec, function (p) { return Math.min(p.L, p.F) - (p.m || 0); }))),
+        hi = Math.max(54, Math.ceil(d3.max(rec, function (p) { return Math.max(p.L, p.F) + (p.m || 0); })));
+    var x = d3.scaleLinear([lo, hi], [lab, w - dir]);
+    var svg = d3.create("svg").attr("width", "100%").attr("viewBox", "0 0 " + w + " " + h).attr("role", "img")
+      .attr("aria-label", "Votos válidos de Lula e Flávio na última pesquisa de cada instituto");
+    var ticks = x.ticks(estreito ? 4 : 8);
+    svg.append("g").selectAll("line").data(ticks).join("line").attr("x1", x).attr("x2", x).attr("y1", top - 6).attr("y2", h - 6)
+      .attr("stroke", function (d) { return d === 50 ? "var(--color-fg)" : "var(--cds-chart-grid)"; })
+      .attr("stroke-dasharray", function (d) { return d === 50 ? "3 3" : null; });
+    svg.append("g").selectAll("text").data(ticks).join("text").attr("x", x).attr("y", 11).attr("text-anchor", "middle").text(function (d) { return d + "%"; });
+    var g = svg.append("g").selectAll("g").data(rec).join("g").attr("transform", function (p, i) { return "translate(0," + (top + i * rowH + rowH / 2) + ")"; });
+    g.append("rect").attr("class", "hit").attr("x", 0).attr("y", -rowH / 2).attr("width", w).attr("height", rowH).attr("fill", "transparent");
+    g.append("text").attr("x", 0).attr("y", 4).style("fill", "var(--color-fg)").style("font-size", "12px")
+      .text(function (p) { var n = estreito ? p.k : p.instituto; return (n.length > (estreito ? 16 : 20) ? n.slice(0, estreito ? 15 : 19) + "…" : n); });
+    if (!estreito) g.append("text").attr("x", lab - 8).attr("y", 4).attr("text-anchor", "end").text(function (p) { return dmy(p.ref); });
+    [["L", "var(--esq-soft)"], ["F", "var(--dir-soft)"]].forEach(function (c) {
+      g.filter(function (p) { return p.m != null; }).append("rect").attr("y", -3).attr("height", 6).attr("rx", 3).attr("fill", c[1]).attr("opacity", .55)
+        .attr("x", function (p) { return x(p[c[0]] - p.m); }).attr("width", function (p) { return x(p[c[0]] + p.m) - x(p[c[0]] - p.m); });
+    });
+    g.append("line").attr("x1", function (p) { return x(p.L); }).attr("x2", function (p) { return x(p.F); }).attr("stroke", "var(--cds-chart-reference)").attr("stroke-width", 2);
+    g.append("circle").attr("cx", function (p) { return x(p.L); }).attr("r", 6).attr("fill", "var(--esq)").attr("stroke", "var(--color-panel)").attr("stroke-width", 1.5);
+    g.append("circle").attr("cx", function (p) { return x(p.F); }).attr("r", 6).attr("fill", "var(--dir)").attr("stroke", "var(--color-panel)").attr("stroke-width", 1.5);
+    g.append("text").attr("x", w).attr("y", 4).attr("text-anchor", "end").style("font-weight", "600")
+      .style("fill", function (p) { return p.F > p.L ? "var(--dir)" : p.L > p.F ? "var(--esq)" : "var(--color-fg-muted)"; })
+      .text(function (p) { var d = p.F - p.L; return Math.abs(d) < 0.05 ? "0" : (d > 0 ? "F +" : "L +") + nf1.format(Math.abs(d)); });
+    box.replaceChildren(svg.node());
+    var t = tip(box);
+    g.on("pointerenter pointermove click", function (ev, p) {
+      g.attr("opacity", function (q) { return q === p ? 1 : .45; });
+      var r = linhasTip(p); r.push(["Diferença:", nf1.format(Math.abs(p.F - p.L)) + " p.p. " + (p.F > p.L ? "para Flávio" : p.L > p.F ? "para Lula" : "")]);
+      mostrar(box, t, r, ev);
+    }).on("pointerleave", function () { t.hidden = true; g.attr("opacity", 1); });
+  }
+
+  function tendencia(ps) {
+    var box = $("p2-trend"), w = Math.max(300, box.clientWidth), h = 240, m = { t: 14, r: 52, b: 28, l: 38 };
+    var datas = Array.from(new Set(ps.map(function (p) { return p.ref; }))).sort();
+    var media = datas.map(function (d) { var r = recentes(ps, d); return { d: d, F: d3.mean(r, function (p) { return p.F; }), n: r.length }; });
+    var pt = { ref: PRIMEIRO_TURNO.data, F: PRIMEIRO_TURNO.flavio / (PRIMEIRO_TURNO.flavio + PRIMEIRO_TURNO.lula) * 100 };
+    var x = d3.scaleTime([day(PRIMEIRO_TURNO.data), new Date(day(datas[datas.length - 1]).getTime() + 864e5)], [m.l, w - m.r]);
+    var ext = d3.extent(ps.reduce(function (a, p) { return a.concat([p.F, p.L]); }, []));
+    var y = d3.scaleLinear([Math.min(46, Math.floor(ext[0])), Math.max(54, Math.ceil(ext[1]))], [h - m.b, m.t]);
+    var svg = d3.create("svg").attr("width", "100%").attr("viewBox", "0 0 " + w + " " + h).attr("role", "img")
+      .attr("aria-label", "Votos válidos de Lula e Flávio em cada pesquisa desde o 1º turno");
+    svg.append("g").selectAll("line").data(y.ticks(5)).join("line").attr("x1", m.l).attr("x2", w - m.r).attr("y1", y).attr("y2", y)
+      .attr("stroke", function (d) { return d === 50 ? "var(--color-fg)" : "var(--cds-chart-grid)"; }).attr("stroke-dasharray", function (d) { return d === 50 ? "3 3" : null; });
+    svg.append("g").selectAll("text").data(y.ticks(5)).join("text").attr("x", m.l - 6).attr("y", function (d) { return y(d) + 4; }).attr("text-anchor", "end").text(function (d) { return d + "%"; });
+    var xt = x.ticks(w < 520 ? 4 : 8);
+    svg.append("g").selectAll("text").data(xt).join("text").attr("x", x).attr("y", h - 8).attr("text-anchor", "middle").text(d3.timeFormat("%d/%m"));
+    svg.append("line").attr("x1", x(day(pt.ref))).attr("x2", x(day(pt.ref))).attr("y1", m.t).attr("y2", h - m.b).attr("stroke", "var(--cds-chart-reference)");
+    svg.append("text").attr("x", x(day(pt.ref)) + 4).attr("y", m.t + 8).text("1º turno");
+    [["F", "var(--dir)"], ["L", "var(--esq)"]].forEach(function (c) {
+      var val = function (d) { return c[0] === "F" ? d.F : 100 - d.F; };
+      var serie = [{ d: pt.ref, F: pt.F }].concat(media);
+      svg.append("path").datum(serie).attr("fill", "none").attr("stroke", c[1]).attr("stroke-width", 2.5).attr("stroke-linejoin", "round")
+        .attr("d", d3.line().x(function (d) { return x(day(d.d)); }).y(function (d) { return y(val(d)); }));
+      var u = serie[serie.length - 1];
+      svg.append("text").attr("x", x(day(u.d)) + 6).attr("y", y(val(u)) + 4).style("fill", c[1]).style("font-weight", "600").text(nf1.format(val(u)) + "%");
+    });
+    svg.append("g").selectAll("circle").data([pt]).join("circle").attr("cx", x(day(pt.ref))).attr("cy", y(pt.F)).attr("r", 4).attr("fill", "var(--dir)");
+    svg.append("g").selectAll("circle").data([pt]).join("circle").attr("cx", x(day(pt.ref))).attr("cy", y(100 - pt.F)).attr("r", 4).attr("fill", "var(--esq)");
+    var pts = svg.append("g").selectAll("g").data(ps).join("g");
+    pts.append("circle").attr("cx", function (p) { return x(day(p.ref)); }).attr("cy", function (p) { return y(p.F); }).attr("r", 3.5).attr("fill", "var(--dir-soft)");
+    pts.append("circle").attr("cx", function (p) { return x(day(p.ref)); }).attr("cy", function (p) { return y(p.L); }).attr("r", 3.5).attr("fill", "var(--esq-soft)");
+    pts.append("rect").attr("x", function (p) { return x(day(p.ref)) - 7; }).attr("width", 14)
+      .attr("y", function (p) { return y(Math.max(p.F, p.L)) - 7; }).attr("height", function (p) { return Math.abs(y(p.F) - y(p.L)) + 14; }).attr("fill", "transparent");
+    box.replaceChildren(svg.node());
+    var t = tip(box);
+    pts.on("pointerenter pointermove click", function (ev, p) {
+      pts.attr("opacity", function (q) { return q === p ? 1 : .35; });
+      mostrar(box, t, linhasTip(p), ev);
+    }).on("pointerleave", function () { t.hidden = true; pts.attr("opacity", 1); });
+    $("p2-trend-note").textContent = "O ponto de 04/10 é o resultado oficial do 1º turno contando só os dois finalistas (Flávio " +
+      pc(pt.F) + ", Lula " + pc(100 - pt.F) + "). Não é pesquisa, mas serve de referência para o ponto de partida.";
+  }
+
+  function lista(ps) {
+    var box = $("p2-lista"), tb = document.createElement("table"), th = document.createElement("thead"), tr = document.createElement("tr");
+    ["Instituto", "Entrevistas", "Fonte", "Lula", "Flávio", "Amostra", "Margem", "Registro TSE"].forEach(function (c) {
+      var e = document.createElement("th"), b = document.createElement("button"); b.type = "button"; b.tabIndex = -1; b.style.cursor = "default"; b.textContent = c; e.appendChild(b); tr.appendChild(e);
+    });
+    th.appendChild(tr); tb.appendChild(th);
+    var body = document.createElement("tbody");
+    ps.slice().reverse().forEach(function (p) {
+      var r = document.createElement("tr");
+      var td = function (txt, cls) { var c = document.createElement("td"); if (cls) c.className = cls; if (txt instanceof Node) c.appendChild(txt); else c.textContent = txt; r.appendChild(c); return c; };
+      td(p.instituto);
+      td((p.campo_inicio ? dmy(p.campo_inicio) + "–" : "até ") + dmy(p.campo_fim || p.ref) + (p.divulgacao ? " (div. " + dmy(p.divulgacao) + ")" : ""));
+      var a = document.createElement("a"); a.href = p.fonte_url; a.target = "_blank"; a.rel = "noopener"; a.textContent = p.fonte; td(a, "wrap");
+      td(pc(p.L) + (p.calculado ? "*" : "")); td(pc(p.F) + (p.calculado ? "*" : ""));
+      td(p.amostra ? nf0.format(p.amostra) : "—"); td(p.m != null ? "±" + nf1.format(p.m) : "—"); td(p.registro || "—");
+      body.appendChild(r);
+    });
+    tb.appendChild(body); box.replaceChildren(tb);
+    $("p2-lista-t").textContent = "Todas as " + ps.length + " pesquisas e fontes (* válidos calculados a partir dos votos totais)";
+  }
+
+  $("p2-btn").addEventListener("click", consultar);
+  var duelo = $("duelo"), tm;
+  if (duelo && window.MutationObserver) new MutationObserver(function () { if (!duelo.hidden && st.j) setTimeout(montar, 30); }).observe(duelo, { attributes: true, attributeFilter: ["hidden"] });
+  window.addEventListener("resize", function () { clearTimeout(tm); tm = setTimeout(function () { if (st.j) montar(); }, 180); });
+  consultar();
 })();
 </script>
 </body>
