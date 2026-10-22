@@ -107,6 +107,32 @@ body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(-
 .pi .p2-sw{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
 @media (max-width:560px){.pi .p2-num b{font-size:1.7rem}.pi .p2-mid{display:none}.pi .p2-nums{grid-template-columns:1fr 1fr}}
 </style>
+<!-- Google Analytics 4: preencha GA_ID com o ID de medição (G-XXXXXXXXXX). Vazio = desligado. -->
+<script>
+(function(){
+  var GA_ID = "";
+  if (!/^G-[A-Z0-9]+$/.test(GA_ID)) return;
+  var s = document.createElement("script");
+  s.async = true; s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){ dataLayer.push(arguments); };
+  gtag("js", new Date());
+  gtag("config", GA_ID, { anonymize_ip: true });
+  /* Cada troca de aba vira o evento "abrir_aba" (parâmetro "aba"). */
+  var ultima = "";
+  function registrar(aba){
+    if (!aba || aba === ultima) return;
+    ultima = aba; gtag("event", "abrir_aba", { aba: aba });
+  }
+  document.addEventListener("click", function(e){
+    var t = e.target.closest && e.target.closest(".tab[data-tab]");
+    if (t) registrar(t.dataset.tab);
+  }, true);
+  window.addEventListener("hashchange", function(){ registrar(decodeURIComponent(location.hash.slice(1))); });
+  registrar(decodeURIComponent(location.hash.slice(1)) || "presidentes");
+})();
+</script>
 </head>
 <body>
 <main class="site">

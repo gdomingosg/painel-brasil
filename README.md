@@ -24,6 +24,10 @@ Na aba `#duelo`, logo abaixo do resultado do 1º turno, a página consulta `data
 
 Para incluir uma pesquisa, acrescente um item em `pesquisas` (instituto, datas de campo e divulgação, amostra, margem, registro no TSE, votos válidos de `flavio` e `lula`, fonte e link) e atualize `atualizado_em`. A média exibida é simples: a última pesquisa de cada instituto feita nos 7 dias anteriores à mais recente.
 
+## Contagem de acessos (Google Analytics 4)
+
+O `index.html` traz o código do Google Analytics 4 no fim do `<head>`. Ele só funciona com o ID de medição preenchido em `var GA_ID = "G-..."`; com o campo vazio, nada é carregado. Além das visitas, cada troca de aba gera o evento `abrir_aba` com o parâmetro `aba` (para ver por aba nos relatórios, cadastre `aba` como dimensão personalizada de evento no Analytics).
+
 ## Atualizar os dados
 
 Edite o arquivo correspondente em `data/` e faça commit; o GitHub Pages publica a nova versão em alguns minutos.
