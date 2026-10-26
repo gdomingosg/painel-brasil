@@ -1,0 +1,72 @@
+[
+ {
+  "id": "lula1",
+  "campanha": "Lula",
+  "ordem": 1,
+  "hora": "13h22",
+  "tribunal": "TSE",
+  "onde": "Salvador, Feira de Santana e Lauro de Freitas (BA)",
+  "motivo": "Redução da frota de ônibus no dia da votação.",
+  "ate": "19h",
+  "extra": "",
+  "resultado": "Não decidido pelo TSE antes das 17h.",
+  "fonte": "Poder360",
+  "fonte_url": "https://www.poder360.com.br/poder-eleicoes-2026/zanin-prorroga-votacao-do-2o-turno-ate-19h/"
+ },
+ {
+  "id": "lula2",
+  "campanha": "Lula",
+  "ordem": 2,
+  "hora": "15h42",
+  "tribunal": "TSE",
+  "onde": "Cidades de SP, AL, PE, RR, PI, PB, PA, PR e RJ, além de qualquer estado com o mesmo problema",
+  "motivo": "Falta de ônibus, frota reduzida e cobrança indevida de passagem. Cita João Pessoa, Teresina, o Marajó e a capital paulista.",
+  "ate": "19h",
+  "extra": "Pede que os TREs identifiquem as zonas afetadas.",
+  "resultado": "Não decidido pelo TSE antes das 17h.",
+  "fonte": "CartaCapital",
+  "fonte_url": "https://www.cartacapital.com.br/politica/lula-e-flavio-bolsonaro-pedem-ao-tse-prorrogacao-da-votacao-ate-as-19h/"
+ },
+ {
+  "id": "lula3",
+  "campanha": "Lula",
+  "ordem": 3,
+  "hora": "15h46",
+  "tribunal": "STF",
+  "onde": "Todas as seções do país",
+  "motivo": "Os mesmos problemas de transporte.",
+  "ate": "19h",
+  "extra": "Pede ainda transporte gratuito por duas horas a mais.",
+  "resultado": "Atendido por Zanin às 17h03; depois restrito às seções ainda abertas.",
+  "fonte": "France News",
+  "fonte_url": "https://francesnews.com.br/post/2026/10/26/43773-tse-vai-medir-impacto-da-prorrogacao-apos-tensao-entre-kassio-nunes-e-zanin"
+ },
+ {
+  "id": "flavio1",
+  "campanha": "Flávio",
+  "ordem": 1,
+  "hora": "15h50",
+  "tribunal": "TSE",
+  "onde": "SP: capital, Jundiaí, Itapevi, Americana, Santa Bárbara d'Oeste, Itapetininga, Botucatu, Apiaí, Ribeira e Iporanga. PR: Curitiba e Guaratuba. SC: Tijucas, Videira, Trombudo Central, Joaçaba e Águas de Chapecó",
+  "motivo": "Chuvas, alagamentos, vias interditadas e falta de energia. Diz que 3.745 eleitores tiveram a seção transferida em Curitiba e Guaratuba e 446 em Itapevi.",
+  "ate": "19h",
+  "extra": "Pede que o resultado presidencial só seja divulgado depois do fim da votação nesses locais. Alternativa: ao menos as seções afetadas de Itapevi, Americana, Curitiba e Guaratuba.",
+  "resultado": "Não decidido pelo TSE antes das 17h; superado pela decisão do STF.",
+  "fonte": "CartaCapital",
+  "fonte_url": "https://www.cartacapital.com.br/politica/lula-e-flavio-bolsonaro-pedem-ao-tse-prorrogacao-da-votacao-ate-as-19h/"
+ },
+ {
+  "id": "flavio2",
+  "campanha": "Flávio",
+  "ordem": 2,
+  "hora": "Sem horário divulgado",
+  "tribunal": "TSE",
+  "onde": "MG: Belo Horizonte, Poços de Caldas e cidades da Grande BH com locais sem energia. RS: São Borja, Itaqui e Uruguaiana",
+  "motivo": "Chuvas e alagamentos; segundo a Cemig, ao menos 163 locais de votação sem energia em MG. No RS, risco de inundação do rio Uruguai.",
+  "ate": "19h",
+  "extra": "Também pede para adiar a divulgação do resultado.",
+  "resultado": "Superado pela decisão do STF.",
+  "fonte": "Dourados Informa",
+  "fonte_url": "https://douradosinforma.com.br/noticias/politica/flavio-bolsonaro-pede-extensao-do-horario-de-votacao-em-mg-e-rs-por-chuvas"
+ }
+]

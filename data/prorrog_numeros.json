@@ -1,0 +1,86 @@
+[
+ {
+  "id": "votos_apos_17h",
+  "valor": 35521,
+  "rotulo": "Confirmações de voto para presidente registradas depois das 17h, no país todo",
+  "fonte": "TV Globo (logs das urnas), via BNews",
+  "fonte_url": "https://www.bnews.com.br/noticias/politica/mais-de-35-mil-votos-foram-registrados-apos-as-17h-vantagem-de-lula-sobre-flavio-foi-de-44-milhoes.html"
+ },
+ {
+  "id": "votos_apos_17h_tot",
+  "valor": 30866,
+  "rotulo": "Dessas, em seções já conferidas com o boletim de urna",
+  "fonte": "TV Globo, via Manchete Rio",
+  "fonte_url": "https://mancheterio.com.br/35-mil-votos-foram-registrados-apos-as-17h-vantagem-de-lula-sobre-flavio-foi-de-44-milhoes/"
+ },
+ {
+  "id": "lula_votos",
+  "valor": 64256232,
+  "rotulo": "Votos de Lula no 2º turno",
+  "fonte": "TSE",
+  "fonte_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/presidente-do-tse-anuncia-reeleicao-de-lula-e-faz-balanco-do-2o-turno-das-eleicoes-2026"
+ },
+ {
+  "id": "flavio_votos",
+  "valor": 59826041,
+  "rotulo": "Votos de Flávio no 2º turno",
+  "fonte": "TSE, via BNews",
+  "fonte_url": "https://www.bnews.com.br/noticias/politica/mais-de-35-mil-votos-foram-registrados-apos-as-17h-vantagem-de-lula-sobre-flavio-foi-de-44-milhoes.html"
+ },
+ {
+  "id": "lula_pct",
+  "valor": 51.79,
+  "rotulo": "Lula, % dos votos válidos",
+  "fonte": "TSE",
+  "fonte_url": "https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/presidente-do-tse-anuncia-reeleicao-de-lula-e-faz-balanco-do-2o-turno-das-eleicoes-2026"
+ },
+ {
+  "id": "flavio_pct",
+  "valor": 48.21,
+  "rotulo": "Flávio, % dos votos válidos",
+  "fonte": "TSE, via BNews",
+  "fonte_url": "https://www.bnews.com.br/noticias/politica/mais-de-35-mil-votos-foram-registrados-apos-as-17h-vantagem-de-lula-sobre-flavio-foi-de-44-milhoes.html"
+ },
+ {
+  "id": "secoes_total",
+  "valor": 499248,
+  "rotulo": "Seções eleitorais no 2º turno",
+  "fonte": "Diário de Pernambuco",
+  "fonte_url": "https://www.diariodepernambuco.com.br/amp/politica/2026/10/11727605-tse-retoma-apuracao-de-votos-do-2-turno-apos-fim-de-prazo-dado-por-zanin.html"
+ },
+ {
+  "id": "secoes_suspensao",
+  "valor": 1225,
+  "rotulo": "Seções apuradas quando o TSE suspendeu a apuração",
+  "fonte": "Diário de Pernambuco",
+  "fonte_url": "https://www.diariodepernambuco.com.br/amp/politica/2026/10/11727605-tse-retoma-apuracao-de-votos-do-2-turno-apos-fim-de-prazo-dado-por-zanin.html"
+ },
+ {
+  "id": "sp_fechadas",
+  "valor": 80,
+  "rotulo": "Urnas de SP já encerradas quando a prorrogação foi confirmada (%)",
+  "fonte": "TRE-SP, via Diário ESP",
+  "fonte_url": "https://diarioesp.com.br/sao-paulo/2026/10/26/tre-sp-confirma-que-80-das-urnas-ja-estavam-fechadas-quando-soube-da-prorrogacao-da-votacao.html"
+ },
+ {
+  "id": "pr_fechadas",
+  "valor": 87.4,
+  "rotulo": "Locais de votação do PR já encerrados (%)",
+  "fonte": "CNN Brasil",
+  "fonte_url": "https://www.cnnbrasil.com.br/eleicoes/mesarios-relatam-confusao-e-incerteza-apos-prorrogacao-do-prazo-para-votar/"
+ },
+ {
+  "id": "abst1",
+  "valor": 21.08,
+  "rotulo": "Abstenção no 1º turno (%)",
+  "fonte": "TSE, via Manchete Rio",
+  "fonte_url": "https://mancheterio.com.br/35-mil-votos-foram-registrados-apos-as-17h-vantagem-de-lula-sobre-flavio-foi-de-44-milhoes/"
+ },
+ {
+  "id": "abst2",
+  "valor": 19.21,
+  "rotulo": "Abstenção no 2º turno (%)",
+  "fonte": "TSE, via Manchete Rio",
+  "fonte_url": "https://mancheterio.com.br/35-mil-votos-foram-registrados-apos-as-17h-vantagem-de-lula-sobre-flavio-foi-de-44-milhoes/"
+ }
+]

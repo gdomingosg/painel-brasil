@@ -1,0 +1,110 @@
+[
+ {
+  "id": "t01",
+  "ordem": 1,
+  "hora": "13h22",
+  "ator": "Lula",
+  "evento": "Primeiro pedido ao TSE: estender a votação até as 19h em Salvador, Feira de Santana e Lauro de Freitas, por falta de ônibus.",
+  "fonte": "Poder360",
+  "fonte_url": "https://www.poder360.com.br/poder-eleicoes-2026/zanin-prorroga-votacao-do-2o-turno-ate-19h/"
+ },
+ {
+  "id": "t02",
+  "ordem": 2,
+  "hora": "15h42",
+  "ator": "Lula",
+  "evento": "Segunda petição ao TSE, com pedido de liminar, estendendo o pedido a cidades de mais nove estados.",
+  "fonte": "Brasil de Fato",
+  "fonte_url": "https://www.brasildefato.com.br/2026/10/25/coligacao-de-lula-pede-ao-tse-extensao-do-horario-de-votacao-em-cidades-de-10-estados/"
+ },
+ {
+  "id": "t03",
+  "ordem": 3,
+  "hora": "15h46",
+  "ator": "Lula",
+  "evento": "Sem decisão do TSE, a campanha leva o pedido ao STF, agora para todo o país.",
+  "fonte": "France News",
+  "fonte_url": "https://francesnews.com.br/post/2026/10/26/43773-tse-vai-medir-impacto-da-prorrogacao-apos-tensao-entre-kassio-nunes-e-zanin"
+ },
+ {
+  "id": "t04",
+  "ordem": 4,
+  "hora": "15h50",
+  "ator": "Flávio",
+  "evento": "Pedido ao TSE para 17 cidades de SP, PR e SC (chuvas, alagamentos, interdições e falta de energia) e para só divulgar o resultado depois do fim da votação nesses locais.",
+  "fonte": "Poder360",
+  "fonte_url": "https://www.poder360.com.br/poder-eleicoes-2026/zanin-prorroga-votacao-do-2o-turno-ate-19h/"
+ },
+ {
+  "id": "t05",
+  "ordem": 5,
+  "hora": "Sem horário",
+  "ator": "Flávio",
+  "evento": "Segundo pedido ao TSE, para cidades de MG e RS atingidas por chuvas, falta de energia e cheia do rio Uruguai. O horário exato não foi divulgado.",
+  "fonte": "Dourados Informa",
+  "fonte_url": "https://douradosinforma.com.br/noticias/politica/flavio-bolsonaro-pede-extensao-do-horario-de-votacao-em-mg-e-rs-por-chuvas"
+ },
+ {
+  "id": "t06",
+  "ordem": 6,
+  "hora": "17h00",
+  "ator": "Regra",
+  "evento": "Horário previsto para o fim da votação. Quem estava na fila recebe senha e vota.",
+  "fonte": "Tribuna do Norte",
+  "fonte_url": "https://tribunadonorte.com.br/tn-nas-eleicoes-2026/flavio-bolsonaro-pede-ao-tse-prorrogacao-da-votacao-ate-as-19h-em-17-cidades/"
+ },
+ {
+  "id": "t07",
+  "ordem": 7,
+  "hora": "17h03",
+  "ator": "STF",
+  "evento": "O ministro Cristiano Zanin divulga a decisão que estende a votação até as 19h em todo o Brasil.",
+  "fonte": "Poder360",
+  "fonte_url": "https://www.poder360.com.br/poder-eleicoes-2026/zanin-prorroga-votacao-do-2o-turno-ate-19h/"
+ },
+ {
+  "id": "t08",
+  "ordem": 8,
+  "hora": "17h06",
+  "ator": "TSE",
+  "evento": "O TSE suspende a apuração com 1.225 das 499.248 seções apuradas.",
+  "fonte": "Diário de Pernambuco",
+  "fonte_url": "https://www.diariodepernambuco.com.br/amp/politica/2026/10/11727605-tse-retoma-apuracao-de-votos-do-2-turno-apos-fim-de-prazo-dado-por-zanin.html"
+ },
+ {
+  "id": "t09",
+  "ordem": 9,
+  "hora": "17h18",
+  "ator": "TRE-SP",
+  "evento": "O TRE-SP repassa a ordem aos 393 juízes eleitorais do estado. Cerca de 80% das urnas já estavam encerradas.",
+  "fonte": "Diário ESP",
+  "fonte_url": "https://diarioesp.com.br/sao-paulo/2026/10/26/tre-sp-confirma-que-80-das-urnas-ja-estavam-fechadas-quando-soube-da-prorrogacao-da-votacao.html"
+ },
+ {
+  "id": "t10",
+  "ordem": 10,
+  "hora": "17h49",
+  "ator": "TSE",
+  "evento": "Nunes Marques assina o ofício que cumpre a decisão. A extensão fica só para as seções ainda abertas.",
+  "fonte": "CartaCapital",
+  "fonte_url": "https://www.cartacapital.com.br/politica/tres-relatam-dificuldade-e-urnas-fechadas-apos-ordem-de-prorrogacao-da-votacao/"
+ },
+ {
+  "id": "t11",
+  "ordem": 11,
+  "hora": "19h00",
+  "ator": "TSE",
+  "evento": "Fim do prazo estendido. A totalização é retomada.",
+  "fonte": "Diário de Pernambuco",
+  "fonte_url": "https://www.diariodepernambuco.com.br/amp/politica/2026/10/11727605-tse-retoma-apuracao-de-votos-do-2-turno-apos-fim-de-prazo-dado-por-zanin.html"
+ },
+ {
+  "id": "t12",
+  "ordem": 12,
+  "hora": "23h27",
+  "ator": "TSE",
+  "evento": "Com 100% das seções apuradas, Lula vence com 51,79% dos votos válidos.",
+  "fonte": "TSE, via Ouviram",
+  "fonte_url": "https://ouviram.com.br/eleicoes/resultados/"
+ }
+]
